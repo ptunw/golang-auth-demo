@@ -1,10 +1,11 @@
 package main
 
 import (
-//	"encoding/json"
+	"encoding/json"
     "log"
     "net/http"
     "github.com/gorilla/mux"
+    //"github.com/dgrijalva/jwt-go"
 )
 
 func main() {
@@ -24,5 +25,15 @@ type Credential struct {
 }
 
 func LoginUser(w http.ResponseWriter, r *http.Request) {
-
+	jsonDecoder := json.NewDecoder(r.Body)
+	var cred Credential
+	err := jsonDecoder.Decode(&cred)
+	if err != nil {
+		panic(err)
+	}
+	const validEmail = "ak.sskg@gmail.com"
+	const validPassword = "password"
+	if cred.Email == validEmail && cred.Password == validPassword {
+		w.Write([]byte("head.pay.sign"))
+	}
 }
