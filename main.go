@@ -8,9 +8,11 @@ import (
     "github.com/dgrijalva/jwt-go"
     "github.com/gorilla/context"
     "strings"
+    "golang-auth-demo/lib/user"
 )
 
 func main() {
+    user.Sample()
     router := mux.NewRouter()
     amw := authMiddleWare{}
     router.Use(amw.ValidateJWT)
